@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+"""
+运行2b数据集实验
+"""
+
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+
+from bci_analysis import run_2b_analysis
+
+# 修改这里的路径为你的实际数据路径
+DATA_PATH = 'D:/240/MI_BCICIV_2b/BCICIV_2b_gdf/B0102T.gdf'
+
+if __name__ == '__main__':
+    print("=" * 50)
+    print("开始2b数据集实验（眼动事件 + PSD + 数据增强）")
+    print("=" * 50)
+    
+    results = run_2b_analysis(DATA_PATH)
+    
+    print("\n" + "=" * 50)
+    print("实验完成！最佳模型：")
+    best_model = max(results.items(), key=lambda x: x[1].mean())
+    print(f"{best_model[0]}: {best_model[1].mean():.4f}")
+    print("=" * 50)
